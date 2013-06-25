@@ -1,11 +1,10 @@
 
 
-
 // Global variables!
 var currentMove;    // current index of movement direction
 var hasMoved;                   // checks whether you have already moved
 var path;                  // list containing movements that were path
-var move;   			
+var move;   			// for switch case, helps decide moves [left, right, up, down] - Keem
 var enemyArea;				//Location indexes of areas affected by enemies? - Beng
 var hazards;				//Location index of hazards? -Beng
 var direct = [[0,-1],[0,1],[-1,0],[1,0]];  // Possible moves [Left, Right, Down, Up] - Beng
@@ -33,7 +32,7 @@ function initAI (player,enemies,maplayout,end)
 		for(var i=0; i<enemyArea.length; i++) 
 			enemyArea[i]=new Array();
 			
-		cur=[player.getX(), player.getY()];
+		cur=[player.getX(), player.getY()]; // x,y coordinate on map - Keem
 		prev = [-1,-1];		//Moved from? undefined -1,-1? -Beng
 		hasMoved = true;	//true to stop it from randombly moving at the beggining? - Beng
 		currentMove=0;		// waley pa! -Beng
@@ -67,7 +66,7 @@ function Thinking(player, enemies, maplayout, end){
         cur = [player.getX(), player.getY()];
         if ((cur[0]!=prev[0]||cur[1]!=prev[1])){
 				
-				var h = computeH(cur,[end.getX(), end.getY()]);
+				var h = computeH(cur,[end.getX(), end.getY()]); // sends current and end coordinates, retrieves distance between them
 				var n = new tile(cur, [-1, -1], h, 0, h);
 				path = pathFind(n, [end.getX(), end.getY()], maplayout);
                 move = path[currentMove];
@@ -211,7 +210,7 @@ function computeG(parent, child){
 		return parent.getG()+10;
 }
 
-function computeH(point, end){
+function computeH(point, end){ //computes for distance between current position and the end's location
 	return (Math.abs(point[0]-end[0])+Math.abs(point[1]-end[1]))*10;
 }
 
