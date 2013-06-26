@@ -1,5 +1,4 @@
 
-
 // Global variables!
 var currentMove;    // current index of movement direction
 var hasMoved;                   // checks whether you have already moved
@@ -67,7 +66,7 @@ function Thinking(player, enemies, maplayout, end){
         if ((cur[0]!=prev[0]||cur[1]!=prev[1])){
 				
 				var h = computeH(cur,[end.getX(), end.getY()]); // sends current and end coordinates, retrieves distance between them
-				var n = new tile(cur, [-1, -1], h, 0, h);
+				var n = new tile(cur, [-1, -1], h, 0, h); 
 				path = pathFind(n, [end.getX(), end.getY()], maplayout);
                 move = path[currentMove];
 				
