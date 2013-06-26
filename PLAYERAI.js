@@ -1,4 +1,3 @@
-
 // Global variables!
 var currentMove;    // current index of movement direction
 var hasMoved;                   // checks whether you have already moved
@@ -6,7 +5,7 @@ var path;                  // list containing movements that were path
 var move;   			// for switch case, helps decide moves [left, right, up, down] - Keem
 var enemyArea;				//Location indexes of areas affected by enemies? - Beng
 var hazards;				//Location index of hazards? -Beng
-var direct = [[0,-1],[0,1],[-1,0],[1,0]];  // Possible moves [Left, Right, Down, Up] - Beng
+var direct = [[0,-1],[0,1],[-1,0],[1,0]];  // Possible moves [Left, Right, Down, Up] - Beng (coordinates ata to ng next tile according to next move so direction nga talaga - Keem)
 var cur;					//Bots current position - Beng
 var prev;					//What was bots previos move - Beng  
 var next;   				//Planned next move? from direct -Beng
@@ -43,7 +42,7 @@ function initAI (player,enemies,maplayout,end)
 // This function is run during the game loop repeatedly.
 function THINK(player,enemies,maplayout,end)
 {		
-		if(process>50){ //Why 50?
+		if(process>50){ //Why 50? - Well, Beng. Di ko rin alam pero ang alam ko ay: too low=thinks less/di mahanap yung tamang path, too high=daming isip, waley kilos
 			if(go>delay){
 				if(done){
 					hazards=genHazards(enemies, enemyArea);
@@ -62,15 +61,15 @@ function THINK(player,enemies,maplayout,end)
 
 function Thinking(player, enemies, maplayout, end){
 
-        cur = [player.getX(), player.getY()];
-        if ((cur[0]!=prev[0]||cur[1]!=prev[1])){
+        cur = [player.getX(), player.getY()]; // gets current coordinate
+        if ((cur[0]!=prev[0]||cur[1]!=prev[1])){ // checks to see if the bot has moved
 				
 				var h = computeH(cur,[end.getX(), end.getY()]); // sends current and end coordinates, retrieves distance between them
 				var n = new tile(cur, [-1, -1], h, 0, h); 
 				path = pathFind(n, [end.getX(), end.getY()], maplayout);
                 move = path[currentMove];
 				
-				next = [cur[0]+direct[move][0], cur[1]+direct[move][1]];
+				next = [cur[0]+direct[move][0], cur[1]+direct[move][1]]; // coordinates of next move
 				
 				if(isHazardous(next)){
 					for(var i=0; i<direct.length; i++){
