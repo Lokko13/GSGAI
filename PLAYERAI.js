@@ -107,7 +107,7 @@ function getEnemyArea(enemies, area){
 		
 		x = enemies[i].getX();
 		y = enemies[i].getY();
-		f = enemies[i].getFacing();
+		f = enemies[i].getFacing(); // enemies that change the direction they're pointing toward (the ones that the bots avoid being seen by) - Keem
 		if(!inArea(area[i],[x, y, f])){
 			
 			eLight = new Array();
@@ -187,7 +187,7 @@ function genHazards(enemies, enemyArea){
 	var hazards=new Array();
 	enemyPos = new Array();
 	for(var h=0; h<enemies.length; h++){
-		enemy=[enemies[h].getX(),enemies[h].getY(),enemies[h].getFacing()];
+		enemy=[enemies[h].getX(),enemies[h].getY(),enemies[h].getFacing()]; // generates coordinates & which way the enemies face
 		for(var i=0; i<enemyArea.length;i++){
 			area=enemyArea[i];
 			for(var j=0; j<area.length; j++){
@@ -286,7 +286,7 @@ function isHazardous(player){
 	for(var i=0; i<hazards.length; i++){
 		area=hazards[i];
 		for(var j=0; j<area.length; j++){
-			if(area[j][0]==pX&&area[j][1]==pY)
+			if(area[j][0]==pX&&area[j][1]==pY) // determines if next move will be occupied by a hazard
 				return true;
 		}
 	}
@@ -336,17 +336,17 @@ function pathFind(start, end, maplayout){
 	
 	while(!found&&open.length>0){
 		open = arrange(open);
-		curPos = open[0].getCoord();
+		curPos = open[0].getCoord(); // coordinates of open space? - Keem
 		
 		for(var i=0; i<direct.length; i++){
 			next=new Array();
-			next.push(curPos[0]+direct[i][0]);
-			next.push(curPos[1]+direct[i][1]);
+			next.push(curPos[0]+direct[i][0]); //position + facing which direction? - Keem
+			next.push(curPos[1]+direct[i][1]); //same as above
 			
-			h = computeH(next, end);
-			g = computeG(open[0], next);
+			h = computeH(next, end); // distance between next move and end - Keem
+			g = computeG(open[0], next); 
 			
-			if(next[0]<0||next[1]<0||next[0]>=20||next[1]>=20){}
+			if(next[0]<0||next[1]<0||next[0]>=20||next[1]>=20){} // why 20? - Keem
 			else if(maplayout[next[0]][next[1]]==3||inClosed(next,closed)){}
 			else if(inOpen(next, open)){
 				open = checkChange(curPos, next, g, open);
