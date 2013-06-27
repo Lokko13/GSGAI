@@ -43,8 +43,11 @@ function initAI (player,enemies,maplayout,end)
 function THINK(player,enemies,maplayout,end)
 {		
 		if(process>50){ //Why 50? - Well, Beng. Di ko rin alam pero ang alam ko ay: too low=thinks less/di mahanap yung tamang path, too high=daming isip, waley kilos
+				//50 iterations given time to think - Beng
 			if(go>delay){
-				if(done){
+				//delay is the time it can think in 1 iteration of process. IT IS RANDOM ATM - Beng [not sure]
+				//this if statement "memorizes" the enemy area
+				if(done){//when "memorizing is done it goes to thinking
 					hazards=genHazards(enemies, enemyArea);
 					Thinking(player, enemies, maplayout, end);
 				}
