@@ -48,7 +48,7 @@ function THINK(player,enemies,maplayout,end)
 				//delay is the time it can think in 1 iteration of process. IT IS RANDOM ATM - Beng [not sure]
 				//this if statement "memorizes" the enemy area
 				if(done){//when "memorizing is done it goes to thinking
-					hazards=genHazards(enemies, enemyArea);
+					hazards=genHazards(enemies, enemyArea); //remembers all the hazards "memorized"
 					Thinking(player, enemies, maplayout, end);
 				}
 			}
@@ -56,7 +56,7 @@ function THINK(player,enemies,maplayout,end)
 				go++;
 		}
 		else{
-				enemyArea = getEnemyArea(enemies, enemyArea);
+				enemyArea = getEnemyArea(enemies, enemyArea); //gets the enemy area in one iteration
 				process++
 		}
 }
@@ -68,17 +68,17 @@ function Thinking(player, enemies, maplayout, end){
         if ((cur[0]!=prev[0]||cur[1]!=prev[1])){ // checks to see if the bot has moved
 				
 				var h = computeH(cur,[end.getX(), end.getY()]); // sends current and end coordinates, retrieves distance between them
-				var n = new tile(cur, [-1, -1], h, 0, h); 
-				path = pathFind(n, [end.getX(), end.getY()], maplayout);
-                move = path[currentMove];
+				var n = new tile(cur, [-1, -1], h, 0, h);  //creates the Bot tile? not sure - Beng
+				path = pathFind(n, [end.getX(), end.getY()], maplayout); //Finds the path
+                		move = path[currentMove]; 
 				
 				next = [cur[0]+direct[move][0], cur[1]+direct[move][1]]; // coordinates of next move
 				
-				if(isHazardous(next)){
-					for(var i=0; i<direct.length; i++){
+				if(isHazardous(next)){ //what it said it would do
+					for(var i=0; i<direct.length; i++){//loops until the length of the direct path?
 						next = [cur[0]+direct[i][0], cur[1]+direct[i][1]];
 						if(!isHazardous(next)&&maplayout[next[0]][next[1]]!=3){
-							move = i;
+							move = i; //changes move if there is a hazard
 							break;
 						}
 					}
