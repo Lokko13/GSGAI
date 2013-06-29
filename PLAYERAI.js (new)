@@ -1,0 +1,110 @@
+/*
+
+  A. HAZARDS
+	- can get location per iteration
+	- can get path of points it is programmed to go to
+	
+	B. PATHS
+	- array to remember previous moves/paths taken for a particular member
+	- reset every level? because if it has even moves/paths from the previous levels,
+	it won't know how far back in the array the moves are just for the level that its currently in
+	
+	
+	C. MOVES
+	- must know whether to move during an iteration or to wait for next iteration
+	- determine whether next move will be in path of enemies (can get coord of next move and compare to path of hazards (getWayPoints)
+	
+	***
+	
+	get current coordinates & end coordinates
+	- calculate distance, pick path with shorter distance?
+	- if path with shorter distance, must have way to save each path and then pick
+	get maplayout
+	get enemy path
+	check if passable (wall or not)
+		is next move dangerous
+			- facing which direction?
+			- which way it will move
+	move / wait
+	move++
+	
+	
+	
+	
+*/
+
+
+var movement= new Array();// lalagyan ng moves in a stack
+	movement.push(1);
+	movement.push(1);
+	movement.push(1);
+	movement.push(2);
+	var i=0;
+
+function THINK(player,enemys,maplayout,end) //player object [green character] check docu for functions
+											//Enemies could be 0; check by .length
+{
+    //Static Variables
+    this.boxwitdh=48;
+    this.boxheight=34.4;
+    this.mapx=20;
+    this.mapy=20;
+	
+	var moved=false;
+	
+	switch(movement[i]){
+		case 1: moved=player.MoveUp();break;
+		case 2: moved=player.MoveDown();break;
+		case 3: moved=player.MoveLeft();break;
+		case 4: moved=player.MoveRight();break;
+	}
+
+	if(moved==true){//if moved then next move
+		i++; //is go? --- index of each movement, iterate to add direction of next move
+	}
+	
+	
+}
+
+function random(start,end)
+{
+    return Math.floor((Math.random()*end)+start);
+}
+
+function initAI(player,enemys,maplayout,end)
+{
+
+}
+
+function checkIfPassable(maplayout,enemys,x,y)
+{
+	var i=0;
+	var a;
+	if((x<mapx&&x>=0)&&(y<mapy&&y>=0))
+	{
+	if(maplayout[x][y]==3)
+	return false;
+	
+	for(i=0;i<enemys.length;i++)
+	{
+		a=enemys[i].checkifSpotted(x,y)
+		if(a)
+		{
+		console.log("SPOTTED");
+		return false;
+		}
+	}
+	}
+	return true;
+}
+function endAI(win)
+{
+if(win==true){
+	//alert("WWin");
+}
+else
+{
+	//alert("fail");
+}
+
+}
