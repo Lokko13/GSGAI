@@ -14,6 +14,12 @@ var go;
 var delay;  
 var done;
 var process; // the current decision of the bot
+var ban; // move that the bot can no longer take because it was a bad move in the previous try - Keem
+var past = new Array(); //remembers past moves - Keem
+var move_num = 0; //represents number of move - Keem
+var trial = 0; // trial # or how many times a level has been attempted - Keem
+var numOfMoves = new Array(); // stores # of moves per trial; - Keem
+var m = 0; // counts # of moves - Keem
 
 // This function is called before the start of each round. Use it to initialize your
 // bots intelligence!
@@ -90,12 +96,46 @@ function Thinking(player, enemies, maplayout, end){
 					case 2: hasMoved = player.MoveLeft(); break;
 					case 3: hasMoved = player.MoveRight(); break;
         		}
+				
+				m++;
+				past[move_num] = move;
+				move_num++;
 				prev = cur;
 				
         }
 
 
 }
+
+/*
+
+should compare current path to all paths taken by but the problem here is that yung # of moves before sya namatay isn't
+equal to # of moves of that actual path because it was cut short by the bot dying. so if it's compared, baka wala rin.
+basta kailangan may paraan na marecord/malaman ng bot na natry nya na yung path na yun kasi yung nangyari is it alternates
+between 2 methods if yung previous one lang yung alam at hindi yung before pa nun.  - Keem
+
+function pastPaths(past, m, move_num, path, trial, numOfMoves)
+{
+
+	var c;
+	var p;
+	var t;
+	var currentPath;
+	
+	currentPath = path.length;
+	
+	
+	for (t = 0; t<trial; t++)
+	{
+	
+		
+	
+	
+	}
+	
+
+}
+*/
 
 function getEnemyArea(enemies, area){
 	var eLight;
@@ -375,9 +415,21 @@ function random(start,end)
     return Math.floor((Math.random()*end)+start);
 }
 
-function endAI(win)
+function endAI(win) // - Keem
 {
+if(win==true){
+	//alert("WWin");
+	var past = new Array();
+	move_num = 0;
+	//m = 0;
+	//trial = 0;
+	}
+else
+{
+	ban = move;
+	//numOfMoves[trial] = m;
+	//trial++;
+}
 
 
 }
-
