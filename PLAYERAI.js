@@ -114,6 +114,9 @@ equal to # of moves of that actual path because it was cut short by the bot dyin
 basta kailangan may paraan na marecord/malaman ng bot na natry nya na yung path na yun kasi yung nangyari is it alternates
 between 2 methods if yung previous one lang yung alam at hindi yung before pa nun.  - Keem
 
+save yun wrong path sa isang array kasama yun index nun wrong move. So yun Banned paths ay isang 2D array.
+tapos dun nya pwede icompare yun mga maling moves nya - Beng  (Feel ko hanggang theory lang to)
+
 function pastPaths(past, m, move_num, path, trial, numOfMoves)
 {
 
